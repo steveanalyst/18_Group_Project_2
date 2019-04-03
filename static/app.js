@@ -1,6 +1,6 @@
 function simpleChart(entry) {
     d3.json(`/data/${entry}`).then((data) => {
-        console.log(entry);
+        console.log(data);
 
         var basic = d3.select('#state-data')
 
@@ -15,7 +15,8 @@ function simpleChart(entry) {
 function init() {
     var selector = d3.select("#selState");
 
-    d3.json('/states').then((stateNames) => {
+    d3.json('/names').then((stateNames) => {
+        console.log(stateNames)
         stateNames.forEach((state) => {
             selector
                 .append("option")
