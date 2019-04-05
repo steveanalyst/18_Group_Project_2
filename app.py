@@ -8,13 +8,7 @@ from sqlalchemy import create_engine
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = 'a2ul0j0$'
-# app.config['MYSQL_DB'] = 'StatePopulation'
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:a2ul0j0$@127.0.0.1:3306/StatePopulation"
-
-# mysql = MySQL(app)
 db = SQLAlchemy(app)
 
 Base = automap_base()
@@ -49,6 +43,12 @@ def sampleData(entry):
         States.yr_2015,
         States.yr_2016,
         States.yr_2017,
+        States.yr_2018,
+        States.yr_2019,
+        States.yr_2020,
+        States.yr_2021,
+        States.yr_2022,
+        States.yr_2023,
     ]
 
     results = db.session.query(*sel).filter(States.States == entry).all()
@@ -56,15 +56,56 @@ def sampleData(entry):
     data = {}
     for result in results:
         data["State"] = result[0]
-        data["2010"] = result[1]
-        data["2011"] = result[2]
-        data["2012"] = result[3]
-        data["2013"] = result[4]
-        data["2014"] = result[5]
-        data["2015"] = result[6]
-        data["2016"] = result[7]
-        data["2017"] = result[8]
+        data["yr2010"] = result[1]
+        data["yr2011"] = result[2]
+        data["yr2012"] = result[3]
+        data["yr2013"] = result[4]
+        data["yr2014"] = result[5]
+        data["yr2015"] = result[6]
+        data["yr2016"] = result[7]
+        data["yr2017"] = result[8]
+        data["yr2018"] = result[9]
+        data["yr2019"] = result[10]
+        data["yr2020"] = result[11]
+        data["yr2021"] = result[12]
+        data["yr2022"] = result[13]
+        data["yr2023"] = result[14]
 
+    return jsonify(data)
+
+@app.route('/map')
+def map():
+    return render_template("map.html")
+
+@app.route('/dataMap')
+def dataMap():
+
+    sel = [
+        States.States,
+        States.yr_2010,
+        States.yr_2017,
+        States.yr_2023,
+        States.percChange11_17,
+        States.Latitude,
+        States.Longitude
+    ]
+
+    results = db.session.query(*sel)
+
+    data = []
+    
+    for result in results:
+        state = {}
+        state["State"] = result[0]
+        state["yr2010"] = result[1]
+        state["yr2017"] = result[2]
+        state["yr2023"] = result[3]
+        state["percentChange"] = float(result[4][:-1])
+        state["Latitude"] = float(result[5])
+        state["Longitude"] = float(result[6])
+        data.append(state)
+
+    print(data)
     return jsonify(data)
 
 if __name__ == '__main__':
