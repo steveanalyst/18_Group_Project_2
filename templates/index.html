@@ -6,13 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>US State Population Migration</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <div id="state-data"></div>
+
     <div id="choice">
         <h5>SELECT STATE:</h5>
         <select id="selState" onchange="optionChanged(this.value)"></select>
     </div>
+    <br>
+    <a href="map">State Population Migration Map</a>
+    <br>
+    <div id="plot"></div>
+    <h5>*From 2018 line is based on projections</h5>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="/static/app.js"></script>
