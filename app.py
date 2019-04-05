@@ -8,11 +8,7 @@ from sqlalchemy import create_engine
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-<<<<<<< HEAD
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:Wxd149163@127.0.0.1:3306/StatePopulation"
-=======
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:<password>@127.0.0.1:3306/StatePopulation"
->>>>>>> a6c685be237c63320e6588e610ed6a355cb194c9
 db = SQLAlchemy(app)
 
 Base = automap_base()

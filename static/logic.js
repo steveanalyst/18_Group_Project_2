@@ -103,7 +103,8 @@ function createMarkers(response) {
             radius: change * 20000
         }).bindPopup("<h1>State: " + response[i].State + "<h1>" + "<h1>Change: " + response[i].percentChange + "%<h1>")
       );
-
+      
+      
       
   };
 
